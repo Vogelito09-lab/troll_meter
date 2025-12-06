@@ -3,7 +3,7 @@ import pandas as pd
 from src.bayes_logic import TrollBrain
 
 # --- Configuracion de pagina ---
-st.set_page_config(page_title="Troll-0-Meter", page_icon= "🛡️")
+st.set_page_config(page_title="Troll-O-Meter", page_icon=" ")
 
 #---Instanciar el cerebro---
 # Usamos session:state para que el objeto persista mientras usemos la app
@@ -13,34 +13,34 @@ if 'cerebro' not in st.session_state:
 brain = st.session_state['cerebro']
 
 # --- Interfaz gráfica ---
-st.title("Troll-0-Meter 3000")
-st.markdown("Detector de toxicidad usando **Naive Bayes Simplificado**")
+st.title("Troll-O-Meter 3000")
+st.markdown("Detector de toxicidad usando **Naive Bayes Simplificado**.")
 
 # --- Barra Lateral: Entrenamiento ---
 with st.sidebar:
-    st.header(" Zona de Aprendizaje ")
-    st.info("La IA nace sin saber. ¡Enseñale")
+    st.header(" Zona de Aprendizaje")
+    st.info("La IA nace sin saber. ¡Enséñale!")
 
     nuevo_txt = st.text_input("Frase de ejemplo:")
-    tipo = st.radio("Etiqueta:", ["Tóxico", "pro"])
+    tipo = st.radio("Etiqueta:", ["toxico", "pro"])
 
     if st.button("Entrenar IA"):
         if nuevo_txt:
             brain.aprender(nuevo_txt, tipo)
-            st.success(F"Aprendiendo: '{nuevo_txt}' es {tipo}")
+            st.success(f"Aprendido: '{nuevo_txt}' es {tipo}")
         else:
-            st.warning("Escribe algo primero")
+            st.warning("Escribe algo primero.")
 
     st.divider()
-    st.caption("Estado de la Memoria")
-    st.text(f"Palabras amigables: {len(brain.vocab_toxico)}")
+    st.caption("Estado de la Memoria:")
+    st.text(f"Palabras Tóxicas: {len(brain.vocab_toxico)}")
     st.text(f"Palabras Amigables: {len(brain.vocab_pro)}")
 
 # -- Área principal: Prediccion ---
-st.subheader("Analizar chat")
+st.subheader("Analizar Chat")
 mensaje = st.text_input("Escribe un mensaje para moderar:", placeholder="Ej: gg wp equipo")
 
-if st.button("Analizar Mensaje."):
+if st.button("Analizar Mensaje"):
     if not mensaje:
         st.warning("Escribe un mensaje.")
     else:
